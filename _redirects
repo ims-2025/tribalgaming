@@ -1,0 +1,18 @@
+# Netlify/Cloudflare Pages _redirects
+# This file is read by both Netlify and Cloudflare Pages. Safe to keep both.
+
+# Search stub
+/search   /news/index.html   302
+
+# Pretty URLs (most hosts handle this automatically; this is belt-and-braces)
+/about/                 /about/index.html                 200
+/news/                  /news/index.html                  200
+/directory/             /directory/index.html             200
+/legal-guide/           /legal-guide/index.html           200
+/compare/               /compare/index.html               200
+/events/                /events/index.html                200
+/contact/               /contact/index.html               200
+/privacy/               /privacy/index.html               200
+/terms/                 /terms/index.html                 200
+/editorial-standards/   /editorial-standards/index.html   200
+/advertise/             /advertise/index.html             200

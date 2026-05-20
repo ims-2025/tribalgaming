@@ -1,0 +1,47 @@
+# TribalGaming.com — Netlify deployment config
+# Drop the whole folder into Netlify (drag-and-drop OR connect your GitHub repo)
+# and this config kicks in automatically.
+
+[build]
+  publish = "."
+
+# Pretty URLs: /directory/ serves directory/index.html automatically — Netlify does
+# this by default. The redirects below are for the few remaining rough edges.
+
+[[redirects]]
+  # Let the search form action ("/search?q=...") at least route to a news-search fallback
+  from = "/search"
+  to = "/news/index.html?q=:splat"
+  status = 302
+
+[[redirects]]
+  # Trailing-slash directory URLs -> serve index.html (belt-and-braces)
+  from = "/:path*/"
+  to = "/:path*/index.html"
+  status = 200
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Basic security + SEO headers
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=()"
+    # Open CORS for our JSON data file so future federated tools can read it
+    Access-Control-Allow-Origin = "*"
+
+[[headers]]
+  for = "/assets/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/img/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

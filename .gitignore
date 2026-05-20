@@ -1,0 +1,34 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+.cursor/
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS / temp
+Thumbs.db
+*.tmp
+*.bak
+
+# Vercel build output (generated)
+.vercel/
+.netlify/
+
+# Local environment overrides (never commit credentials)
+.env
+.env.local
+.env.*.local
+
+# Node (if you ever add tooling later)
+node_modules/
+package-lock.json

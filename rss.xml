@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>TribalGaming.com — News &amp; Analysis</title>
+    <link>https://tribalgaming.com/</link>
+    <description>Authoritative news and analysis of tribal gaming in the United States and Canada.</description>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 23 Apr 2026 09:00:00 -0400</lastBuildDate>
+    <atom:link href="https://tribalgaming.com/rss.xml" rel="self" type="application/rss+xml" />
+    <copyright>© 2026 TribalGaming Media Corp.</copyright>
+
+    <item>
+      <title>Inside the Seminole Compact: How one 30-year deal reshaped American sports betting</title>
+      <link>https://tribalgaming.com/news/seminole-compact-2026-analysis/</link>
+      <guid>https://tribalgaming.com/news/seminole-compact-2026-analysis/</guid>
+      <pubDate>Wed, 22 Apr 2026 06:00:00 -0400</pubDate>
+      <description>An exclusive analysis of the hub-and-spoke framework now drawing legal challenges in four other states — and why tribal attorneys say IGRA has always anticipated this moment.</description>
+    </item>
+
+    <item>
+      <title>Tribal gaming generated $138B in total economic output in 2025, new report finds</title>
+      <link>https://tribalgaming.com/news/economic-impact-report-2025/</link>
+      <guid>https://tribalgaming.com/news/economic-impact-report-2025/</guid>
+      <pubDate>Sat, 18 Apr 2026 06:00:00 -0400</pubDate>
+      <description>The most comprehensive joint AGA–NIGA assessment to date.</description>
+    </item>
+
+    <item>
+      <title>SIGA announces seventh property as Saskatchewan First Nations drive provincial gaming</title>
+      <link>https://tribalgaming.com/news/saskatchewan-siga-expansion/</link>
+      <guid>https://tribalgaming.com/news/saskatchewan-siga-expansion/</guid>
+      <pubDate>Fri, 17 Apr 2026 06:00:00 -0400</pubDate>
+      <description>The Saskatchewan Indian Gaming Authority remains the dominant model for First Nations gaming in Canada.</description>
+    </item>
+  </channel>
+</rss>

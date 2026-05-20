@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2a3624"/>
+      <stop offset="1" stop-color="#0d1409"/>
+    </linearGradient>
+    <radialGradient id="glow" cx=".8" cy=".25" r=".7">
+      <stop offset="0" stop-color="#c98a1b" stop-opacity=".35"/>
+      <stop offset="1" stop-color="#c98a1b" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <g opacity=".2">
+    <path d="M0 140 L1200 140" stroke="#c98a1b" stroke-width=".5"/>
+    <path d="M0 210 L1200 210" stroke="#c98a1b" stroke-width=".5"/>
+    <path d="M0 280 L1200 280" stroke="#c98a1b" stroke-width=".5"/>
+    <path d="M0 350 L1200 350" stroke="#c98a1b" stroke-width=".5"/>
+    <path d="M0 420 L1200 420" stroke="#c98a1b" stroke-width=".5"/>
+  </g>
+  <rect y="0" width="1200" height="6" fill="#c98a1b"/>
+  <g transform="translate(80,200)">
+    <text font-family="Source Serif Pro, Georgia, serif" font-weight="700" font-size="22" fill="#c98a1b" letter-spacing="4">TRIBALGAMING.COM  ·  LEGAL GUIDE</text>
+    <text y="80" font-family="Source Serif Pro, Georgia, serif" font-weight="900" font-size="64" fill="#faf7f1">The Tribal Gaming</text>
+    <text y="148" font-family="Source Serif Pro, Georgia, serif" font-weight="900" font-size="64" fill="#faf7f1">Legal Guide</text>
+    <text y="210" font-family="Inter, sans-serif" font-size="22" fill="#d7cfb9">IGRA · Compacts · Canadian Framework</text>
+    <text y="260" font-family="Inter, sans-serif" font-size="18" fill="#a19a87">15 sections · Reviewed quarterly · Researched by outside counsel</text>
+  </g>
+</svg>

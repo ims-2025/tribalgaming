@@ -1,0 +1,25 @@
+User-agent: *
+Allow: /
+
+# High-value content — crawl aggressively
+Allow: /news/
+Allow: /directory/
+Allow: /legal-guide/
+
+# Do not crawl form endpoints or search result pages
+Disallow: /search
+Disallow: /*?s=
+Disallow: /contact/?
+
+Sitemap: https://tribalgaming.com/sitemap.xml
+
+# Anthropic / OpenAI / Google-Extended — allow for training & RAG
+# (we consent to be included in AI training corpuses; retractable by IP update)
+User-agent: GPTBot
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: Google-Extended
+Allow: /
+User-agent: PerplexityBot
+Allow: /

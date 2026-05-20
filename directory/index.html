@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Tribal Casino Directory — Every Tribe Operating Gaming in the U.S. &amp; Canada | TribalGaming.com</title>
+<meta name="description" content="The complete, searchable directory of federally recognized tribes operating casinos in the United States and First Nations gaming operators in Canada. Filter by state, IGRA class, and properties. Interactive map included." />
+<meta name="keywords" content="tribal casino directory, list of tribal casinos, tribes operating casinos, Native American casinos map, First Nations casinos Canada, Indian casino by state" />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href="https://tribalgaming.com/directory/" />
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Tribal Casino Directory — U.S. &amp; Canada" />
+<meta property="og:description" content="The complete, searchable directory of tribes operating gaming across North America." />
+<meta property="og:url" content="https://tribalgaming.com/directory/" />
+<meta property="og:image" content="https://tribalgaming.com/assets/img/og-directory.png" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+Pro:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/styles.css" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Tribal Casino Directory — U.S. & Canada",
+  "url": "https://tribalgaming.com/directory/",
+  "description": "Complete directory of tribes and First Nations operating gaming in the United States and Canada.",
+  "isPartOf": { "@type": "WebSite", "name": "TribalGaming.com", "url": "https://tribalgaming.com/" }
+}
+</script>
+</head>
+<body>
+
+<div class="topbar"><div class="container"><span class="today">Thursday, April 23, 2026</span><span><a href="../contact/index.html">Subscribe</a> · <a href="../advertise/index.html">Advertise</a> · <a href="../contact/index.html">Contact</a></span></div></div>
+
+<header class="masthead">
+  <div class="container wrap">
+    <a class="logo" href="../index.html"><span class="mark" aria-hidden="true"></span><span>TribalGaming<span style="color:var(--brand)">.</span>com<span class="tag">The industry portal for tribal gaming</span></span></a>
+    <form class="search-mini" role="search" action="/search" method="get"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg><input type="search" name="q" placeholder="Search…" aria-label="Search"/></form>
+  </div>
+</header>
+
+<nav class="nav" aria-label="Primary">
+  <div class="container wrap">
+    <a href="../index.html">Home</a><a href="../news/index.html">News</a><a href="../directory/index.html" class="active">Casino Directory</a><a href="../legal-guide/index.html">Legal Guide</a><a href="../compare/index.html">Compare</a><a href="../events/index.html">Events &amp; Jobs</a><a href="../about/index.html">About</a>
+    <span class="spacer"></span><a href="../contact/index.html" class="cta">Daily Brief →</a>
+  </div>
+</nav>
+
+<div class="crumbs"><div class="container"><a href="../index.html">Home</a><span class="sep">›</span>Directory</div></div>
+
+<section class="article-head" style="padding:36px 0 24px;">
+  <div class="container">
+    <span class="kicker">The Directory</span>
+    <h1 style="margin-top:10px; font-size:clamp(2rem,4vw,3rem);">Tribal &amp; First Nations Gaming Operators</h1>
+    <p class="dek">Every federally recognized tribe operating gaming in the United States, plus First Nations operators in Canada. Click a state on the map or use the filters to narrow the view. <strong>Currently tracking <span id="totalCount">46</span> operators</strong> across <strong><span id="totalProps">0</span> properties</strong>.</p>
+  </div>
+</section>
+
+<div class="container">
+
+  <div class="map-wrap">
+    <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:6px;">
+      <h2 style="font-size:1.3rem; margin:0;">Interactive map — U.S. &amp; Canada</h2>
+      <span class="small muted">Click a pin for the tribe · click a state to filter</span>
+    </div>
+    <svg class="map-svg" id="mapSVG" viewBox="0 0 960 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Map of tribal gaming operators in the U.S. and Canada">
+      <!-- Canada outline (stylized) -->
+      <g id="canada">
+        <path class="state" data-state="BC" d="M40 40 L220 25 L240 180 L60 180 Z"/>
+        <path class="state" data-state="AB" d="M220 25 L340 30 L340 180 L240 180 Z"/>
+        <path class="state" data-state="SK" d="M340 30 L440 40 L440 180 L340 180 Z"/>
+        <path class="state" data-state="MB" d="M440 40 L540 50 L540 180 L440 180 Z"/>
+        <path class="state" data-state="ON" d="M540 50 L720 70 L720 180 L540 180 Z"/>
+        <path class="state" data-state="QC" d="M720 70 L900 80 L900 180 L720 180 Z"/>
+      </g>
+      <!-- U.S. lower 48 (stylized grid — not geographically precise but recognisable block layout) -->
+      <g id="usa">
+        <!-- West -->
+        <path class="state" data-state="WA" d="M80 180 L210 180 L210 240 L80 240 Z"/>
+        <path class="state" data-state="OR" d="M80 240 L210 240 L210 300 L80 300 Z"/>
+        <path class="state" data-state="CA" d="M80 300 L210 300 L190 440 L80 420 Z"/>
+        <path class="state" data-state="NV" d="M210 240 L290 240 L290 340 L210 340 Z"/>
+        <path class="state" data-state="ID" d="M210 180 L290 180 L290 240 L210 240 Z"/>
+        <path class="state" data-state="UT" d="M290 240 L360 240 L360 340 L290 340 Z"/>
+        <path class="state" data-state="AZ" d="M210 340 L290 340 L290 440 L190 440 Z"/>
+        <path class="state" data-state="MT" d="M290 180 L420 180 L420 240 L290 240 Z"/>
+        <path class="state" data-state="WY" d="M360 240 L420 240 L420 300 L360 300 Z"/>
+        <path class="state" data-state="CO" d="M360 300 L440 300 L440 380 L360 380 Z"/>
+        <path class="state" data-state="NM" d="M290 380 L360 380 L360 440 L290 440 Z"/>
+        <!-- Plains -->
+        <path class="state" data-state="ND" d="M420 180 L490 180 L490 220 L420 220 Z"/>
+        <path class="state" data-state="SD" d="M420 220 L490 220 L490 260 L420 260 Z"/>
+        <path class="state" data-state="NE" d="M420 260 L510 260 L510 300 L420 300 Z"/>
+        <path class="state" data-state="KS" d="M420 300 L510 300 L510 340 L420 340 Z"/>
+        <path class="state" data-state="OK" d="M420 340 L530 340 L540 400 L420 400 Z"/>
+        <path class="state" data-state="TX" d="M360 380 L540 400 L540 460 L370 460 Z"/>
+        <!-- Upper Midwest -->
+        <path class="state" data-state="MN" d="M490 180 L570 180 L570 240 L490 240 Z"/>
+        <path class="state" data-state="IA" d="M490 240 L570 240 L570 290 L490 290 Z"/>
+        <path class="state" data-state="WI" d="M570 195 L630 195 L630 250 L570 250 Z"/>
+        <path class="state" data-state="IL" d="M570 250 L630 250 L630 310 L570 310 Z"/>
+        <path class="state" data-state="MO" d="M490 290 L570 290 L570 340 L490 340 Z"/>
+        <path class="state" data-state="AR" d="M490 340 L570 340 L570 395 L490 395 Z"/>
+        <path class="state" data-state="LA" d="M540 395 L620 395 L620 460 L540 460 Z"/>
+        <!-- Great Lakes -->
+        <path class="state" data-state="MI" d="M630 195 L700 195 L700 260 L630 260 Z"/>
+        <path class="state" data-state="IN" d="M630 260 L680 260 L680 310 L630 310 Z"/>
+        <path class="state" data-state="OH" d="M680 260 L740 260 L740 310 L680 310 Z"/>
+        <path class="state" data-state="KY" d="M610 310 L740 310 L740 345 L610 345 Z"/>
+        <path class="state" data-state="TN" d="M570 345 L740 345 L740 380 L570 380 Z"/>
+        <!-- Deep South -->
+        <path class="state" data-state="MS" d="M570 380 L630 380 L630 445 L570 445 Z"/>
+        <path class="state" data-state="AL" d="M630 380 L690 380 L690 445 L630 445 Z"/>
+        <path class="state" data-state="GA" d="M690 380 L760 380 L760 440 L690 440 Z"/>
+        <path class="state" data-state="FL" d="M690 440 L820 440 L820 475 L690 475 Z"/>
+        <path class="state" data-state="SC" d="M740 345 L790 360 L760 400 L720 390 Z"/>
+        <path class="state" data-state="NC" d="M700 315 L820 320 L820 350 L720 360 Z"/>
+        <!-- Northeast -->
+        <path class="state" data-state="VA" d="M740 280 L830 280 L830 315 L740 315 Z"/>
+        <path class="state" data-state="WV" d="M710 265 L780 260 L790 290 L720 295 Z"/>
+        <path class="state" data-state="PA" d="M740 230 L840 225 L840 265 L740 265 Z"/>
+        <path class="state" data-state="NY" d="M740 195 L870 195 L870 230 L740 230 Z"/>
+        <path class="state" data-state="VT" d="M850 180 L878 180 L878 210 L850 210 Z"/>
+        <path class="state" data-state="NH" d="M878 180 L900 180 L900 215 L878 215 Z"/>
+        <path class="state" data-state="ME" d="M880 140 L940 140 L940 195 L880 195 Z"/>
+        <path class="state" data-state="MA" d="M850 210 L895 210 L895 225 L850 225 Z"/>
+        <path class="state" data-state="CT" d="M830 225 L880 225 L880 242 L830 242 Z"/>
+        <path class="state" data-state="RI" d="M880 225 L895 225 L895 242 L880 242 Z"/>
+        <path class="state" data-state="NJ" d="M840 235 L870 235 L870 275 L840 275 Z"/>
+        <path class="state" data-state="DE" d="M830 275 L852 275 L852 295 L830 295 Z"/>
+        <path class="state" data-state="MD" d="M790 285 L852 275 L830 305 L790 305 Z"/>
+      </g>
+      <!-- Pins rendered by JS -->
+      <g id="pins"></g>
+    </svg>
+    <div class="map-legend">
+      <span><span class="dot" style="background:var(--brand)"></span>Tribal / First Nations operator</span>
+      <span><span class="dot" style="background:#e4d4a8; border:1px solid var(--rule)"></span>State / province with tribal gaming</span>
+      <span><span class="dot" style="background:var(--paper-warm); border:1px solid var(--rule)"></span>No tribal gaming (or not in dataset)</span>
+    </div>
+  </div>
+
+  <div class="dir-layout">
+    <aside class="filters" aria-label="Filter directory">
+      <h4>Filter</h4>
+      <input type="search" id="q" aria-label="Search the directory" placeholder="Search tribe, casino, state…" />
+      <div class="group">
+        <h4>Country</h4>
+        <label><input type="checkbox" value="US" class="fctry" checked> United States</label>
+        <label><input type="checkbox" value="CA" class="fctry" checked> Canada</label>
+      </div>
+      <div class="group">
+        <h4>IGRA Class</h4>
+        <label><input type="checkbox" value="III" class="fcls" checked> Class III</label>
+        <label><input type="checkbox" value="II+III" class="fcls" checked> Class II + III</label>
+        <label><input type="checkbox" value="II" class="fcls" checked> Class II only</label>
+        <label><input type="checkbox" value="FN" class="fcls" checked> First Nations (Canada)</label>
+      </div>
+      <div class="group">
+        <h4>Sports betting</h4>
+        <label><input type="checkbox" id="fsb"> Operators offering sports betting</label>
+      </div>
+      <div class="group">
+        <button class="btn sm ghost" onclick="resetFilters()">Reset filters</button>
+      </div>
+    </aside>
+    <main>
+      <div class="dir-toolbar">
+        <span class="count"><span id="shownCount">0</span> operators shown</span>
+        <div class="sort">
+          <label for="sort">Sort by</label>
+          <select id="sort">
+            <option value="name">Name (A–Z)</option>
+            <option value="properties">Most properties</option>
+            <option value="state">State / province</option>
+          </select>
+        </div>
+      </div>
+      <div class="tribe-grid" id="tribeGrid"></div>
+
+      <div style="margin:40px 0 20px; padding:22px; background:var(--paper-warm); border:1px solid var(--rule); border-radius:var(--radius);">
+        <strong>Missing an operator?</strong> The directory is updated continuously; if we're missing a tribe or property, <a href="../contact/index.html">let us know</a>. We verify every listing against tribal government materials and NIGC records before adding.
+      </div>
+    </main>
+  </div>
+</div>
+
+<footer class="foot">
+  <div class="container">
+    <div class="grid">
+      <div>
+        <div style="color:#fff; font-family:var(--font-serif); font-size:22px; font-weight:800; margin-bottom:12px;">TribalGaming<span style="color:var(--brand)">.</span>com</div>
+        <p class="about">The industry portal for tribal gaming in the U.S. and Canada. Editorially independent.</p>
+        <p style="margin-top:14px; font-size:12px; color:#8e8773;">© 2026 TribalGaming Media Corp.</p>
+      </div>
+      <div><h5>Sections</h5><ul><li><a href="../news/index.html">News</a></li><li><a href="../directory/index.html">Directory</a></li><li><a href="../legal-guide/index.html">Legal Guide</a></li><li><a href="../compare/index.html">Compare</a></li><li><a href="../events/index.html">Events &amp; Jobs</a></li></ul></div>
+      <div><h5>Topics</h5><ul><li><a href="../news/index.html?t=policy">Policy</a></li><li><a href="../news/index.html?t=sports-betting">Sports betting</a></li><li><a href="../news/index.html?t=sovereignty">Sovereignty</a></li><li><a href="../news/index.html?t=canada">Canada</a></li><li><a href="../news/index.html?t=economy">Economy</a></li></ul></div>
+      <div><h5>About</h5><ul><li><a href="../about/index.html">Our mission</a></li><li><a href="../editorial-standards/index.html">Editorial standards</a></li><li><a href="../advertise/index.html">Advertise</a></li><li><a href="../contact/index.html">Contact</a></li></ul></div>
+      <div><h5>Follow</h5><ul><li><a href="../contact/index.html">Morning Brief</a></li><li><a href="../rss.xml">RSS feed</a></li><li><a href="https://twitter.com/tribalgaming">X / Twitter</a></li></ul></div>
+    </div>
+    <div class="base"><span>Not affiliated with NIGC, NIGA, AGA, or any tribal government.</span><span><a href="../privacy/index.html">Privacy</a> · <a href="../terms/index.html">Terms</a> · <a href="../about/index.html">Editorial standards</a></span></div>
+  </div>
+</footer>
+
+<script src="../assets/data/tribes.js"></script>
+<script src="../assets/js/directory.js" defer></script>
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/main.js" defer></script>
+</body>
+</html>
