@@ -835,3 +835,61 @@ h2[id], h3[id] { scroll-margin-top: 80px; }
 .section:nth-of-type(2) { animation-delay: .05s; }
 .section:nth-of-type(3) { animation-delay: .1s; }
 
+/* =========================================================
+   HERO TIGHTENING — fit headline + buttons above the fold
+   ========================================================= */
+.hero-home {
+  padding: 36px 0 32px;
+}
+.hero-lead h1 {
+  font-size: clamp(1.75rem, 3.1vw, 2.6rem);
+  line-height: 1.08;
+  margin-bottom: 14px;
+  letter-spacing: -0.015em;
+}
+.hero-lead .kicker {
+  margin-bottom: 12px;
+  font-size: 12px;
+  padding: 5px 12px;
+}
+.hero-lead .sub {
+  font-size: 16px;
+  line-height: 1.55;
+  margin-bottom: 10px;
+  max-width: 60ch;
+}
+.hero-lead .byline {
+  font-size: 12.5px;
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+.hero-side {
+  padding: 18px;
+}
+.hero-side h4 {
+  margin-bottom: 10px;
+  font-size: 13px;
+}
+.hero-side li {
+  padding: 7px 0;
+  font-size: 13.5px;
+  line-height: 1.4;
+}
+.hero-side .stamp {
+  font-size: 11px;
+  margin-top: 2px;
+}
+.hero-side::before {
+  top: 14px; right: 14px;
+}
+
+/* On smaller laptop screens (most MacBooks), tighten further */
+@media (max-height: 850px) {
+  .hero-home { padding: 24px 0 24px; }
+  .hero-lead h1 { font-size: clamp(1.5rem, 2.5vw, 2.15rem); margin-bottom: 10px; }
+  .hero-lead .sub { font-size: 14.5px; margin-bottom: 8px; line-height: 1.5; }
+  .hero-lead .byline { margin-top: 8px; font-size: 12px; }
+  .hero-side li { padding: 5px 0; font-size: 12.5px; }
+  .hero-side h4 { margin-bottom: 8px; }
+}
+
