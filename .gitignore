@@ -28,7 +28,16 @@ Thumbs.db
 .env
 .env.local
 .env.*.local
+.github_token
+
+# Python (publishing helper)
+__pycache__/
+*.pyc
 
 # Node (if you ever add tooling later)
 node_modules/
 package-lock.json
+
+# Smoke-test artifacts from publish_daily.py dry-run (May 21, 2026) — safe to delete
+news/test-smoke-article-*/
+news/tribalgaming-publishing-smoke-test/
