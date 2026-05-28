@@ -4,6 +4,27 @@
 (function () {
   const cfg = window.TG_CONFIG || {};
 
+  // -------- Live date in top bar --------
+  // Updates any element with class "today" to show the current date.
+  // Format: "Thursday, May 28, 2026 · Published daily since 2026"
+  try {
+    const todayEls = document.querySelectorAll(".today");
+    if (todayEls.length) {
+      const d = new Date();
+      const formatted = d.toLocaleDateString("en-US", {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
+      todayEls.forEach((el) => {
+        el.textContent = formatted + " · Published daily since 2026";
+      });
+    }
+  } catch (e) {
+    /* leave the hardcoded fallback in place if anything goes wrong */
+  }
+
   // -------- Active nav --------
   const path = location.pathname.replace(/\/+$/, "/") || "/";
   document.querySelectorAll(".nav a").forEach((a) => {
