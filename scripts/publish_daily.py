@@ -484,6 +484,37 @@ def git_commit_and_push(
         print(f"git push: {out}")
 
 
+# ---- Lock-file safety ------------------------------------------------------
+#
+# When this script runs from the Cowork sandbox, the user's local repo is
+# mounted via FUSE. The mount permits writes and renames but DENIES unlink.
+# That means if anything in the parent shell session (e.g. an ad-hoc
+# `git status` run by the agent before/after this script) leaves behind a
+# `.git/index.lock`, the sandbox cannot `rm` it — and the user's next
+# commit in GitHub Desktop will fail with "A lock file already exists".
+#
+# We can't delete the file from the sandbox, but we CAN rename it, which is
+# enough to clear git's lock check. Run this at the start of main() and again
+# after the script finishes so a clean handoff is guaranteed.
+
+def clear_index_lock() -> None:
+    lock = REPO_ROOT / ".git" / "index.lock"
+    if not lock.exists():
+        return
+    # Try a normal unlink first (works on the user's macOS).
+    try:
+        lock.unlink()
+        return
+    except OSError:
+        pass
+    # Fall back to rename (works in the FUSE-mounted sandbox).
+    try:
+        orphan = REPO_ROOT / ".git" / f"index.lock.orphan-{int(datetime.now().timestamp())}"
+        lock.rename(orphan)
+    except OSError as e:
+        print(f"⚠ Could not clear stale .git/index.lock: {e}", file=sys.stderr)
+
+
 # ---- Entrypoint ------------------------------------------------------------
 
 def main() -> int:
@@ -496,6 +527,9 @@ def main() -> int:
     parser.add_argument("--seed", type=int, default=None,
                         help="Optional seed for deterministic time selection.")
     args = parser.parse_args()
+
+    # Clear any stale .git/index.lock left behind by an earlier session.
+    clear_index_lock()
 
     manifest = json.loads(args.manifest.read_text(encoding="utf-8"))
     if not isinstance(manifest, list) or not manifest:
@@ -550,6 +584,9 @@ def main() -> int:
         do_commit=not args.no_commit,
         do_push=not args.no_push,
     )
+    # Final safety pass: ensure no lock file lingers for the user's next
+    # GitHub Desktop commit.
+    clear_index_lock()
     print("Done.")
     return 0
 
