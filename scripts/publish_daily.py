@@ -58,6 +58,7 @@ NEWS_DIR = REPO_ROOT / "news"
 SITEMAP = REPO_ROOT / "sitemap.xml"
 RSS = REPO_ROOT / "rss.xml"
 NEWS_INDEX = REPO_ROOT / "news" / "index.html"
+HOMEPAGE = REPO_ROOT / "index.html"
 
 SECTION_HEADER_PATTERN = {
     "policy":    '<h2 id="policy"',
@@ -314,6 +315,165 @@ def update_rss(articles: list[dict], datetimes: list[datetime]) -> None:
     RSS.write_text(text, encoding="utf-8")
 
 
+# ---- Homepage rebuild ------------------------------------------------------
+#
+# The homepage (`/index.html`) has two blocks that must stay fresh:
+#   1. "Top stories" — a 5-card grid with a feature card on the left.
+#   2. "Today at a glance" — a 5-item bullet list in the hero sidebar.
+#
+# Both are wrapped in sentinel comments and fully overwritten by this script
+# every day. Today's newly-published 5 articles become tomorrow's homepage;
+# nothing older than 24 hours ever shows on the front page.
+
+TOP_STORIES_START = "<!-- AUTO:TOP_STORIES:START -->"
+TOP_STORIES_END = "<!-- AUTO:TOP_STORIES:END -->"
+GLANCE_START = "<!-- AUTO:GLANCE:START -->"
+GLANCE_END = "<!-- AUTO:GLANCE:END -->"
+
+# Category → SVG gradient palette. Keeps the feature card visually varied
+# without hand-authoring per-article artwork.
+_THUMB_PALETTE = {
+    "policy":     ("#611d15", "#c98a1b"),  # rust → gold
+    "economy":    ("#4a5d3a", "#c98a1b"),  # olive → gold
+    "canada":     ("#27506b", "#f3e5c3"),  # slate blue → sand
+    "regulation": ("#2a3624", "#c98a1b"),
+    "sports":     ("#8a2a1f", "#f3e5c3"),
+    "markets":    ("#4a5d3a", "#f3e5c3"),
+}
+
+def _thumb_svg(section: str, label: str, feature: bool = False) -> str:
+    """Render a small inline SVG thumbnail for a homepage card."""
+    c1, c2 = _THUMB_PALETTE.get(section.lower(), _THUMB_PALETTE["policy"])
+    grad_id = f"g{abs(hash(label)) % 10000}"
+    label_up = label.upper()[:14]
+    if feature:
+        return (
+            f'<svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">'
+            f'<defs><linearGradient id="{grad_id}" x1="0" y1="0" x2="1" y2="1">'
+            f'<stop offset="0" stop-color="{c1}"/><stop offset="1" stop-color="{c2}"/>'
+            f'</linearGradient></defs>'
+            f'<rect width="400" height="250" fill="url(#{grad_id})"/>'
+            f'<path d="M0 190 L60 160 L120 175 L200 130 L280 155 L340 120 L400 140 L400 250 L0 250 Z" fill="#2a3624" opacity=".85"/>'
+            f'<circle cx="320" cy="60" r="28" fill="#f3e5c3" opacity=".9"/>'
+            f'<text x="200" y="130" text-anchor="middle" font-family="Source Serif Pro" font-size="22" font-weight="700" fill="#f3e5c3">{label_up}</text>'
+            f'</svg>'
+        )
+    return (
+        f'<svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">'
+        f'<rect width="400" height="250" fill="{c1}"/>'
+        f'<path d="M0 150 L100 120 L200 140 L300 110 L400 130 L400 250 L0 250Z" fill="#12130f" opacity=".7"/>'
+        f'<text x="200" y="130" text-anchor="middle" font-family="Source Serif Pro" font-size="20" fill="{c2}" font-weight="700">{label_up}</text>'
+        f'</svg>'
+    )
+
+
+def _replace_between(text: str, start_marker: str, end_marker: str, new_block: str) -> str:
+    """Replace everything between start_marker and end_marker (markers preserved)."""
+    s = text.find(start_marker)
+    e = text.find(end_marker)
+    if s == -1 or e == -1 or e < s:
+        return text  # markers missing — leave file alone
+    return text[: s + len(start_marker)] + "\n" + new_block + "\n      " + text[e:]
+
+
+def _relative_time(dt: datetime, now: datetime) -> str:
+    """Return a short 'X min ago' / 'X hrs ago' / 'Yesterday' label."""
+    delta = now - dt
+    seconds = delta.total_seconds()
+    if seconds < 0:
+        return "Just now"
+    minutes = int(seconds // 60)
+    if minutes < 60:
+        return f"Updated {max(minutes, 1)} min ago"
+    hours = int(minutes // 60)
+    if hours < 12:
+        return f"Updated {hours} hr{'s' if hours != 1 else ''} ago"
+    days = int(hours // 24)
+    if days == 0:
+        return "Earlier today"
+    if days == 1:
+        return "Yesterday"
+    if days < 7:
+        return f"{days} days ago"
+    return dt.strftime("%b %-d")
+
+
+def update_homepage(articles: list[dict], datetimes: list[datetime]) -> None:
+    """Rewrite the Top Stories grid and Today at a Glance list on index.html.
+
+    `articles`/`datetimes` are today's newly-published batch, ordered as
+    generated. The first article becomes the feature card; the remaining
+    four fill the standard grid. If fewer than 5 articles are published,
+    remaining slots are simply dropped rather than padded with stale data.
+    """
+    text = HOMEPAGE.read_text(encoding="utf-8")
+
+    # Sort newest first so most recent shows top-left as feature.
+    ordered = sorted(zip(articles, datetimes), key=lambda p: p[1], reverse=True)
+    if not ordered:
+        return
+    feature_art, feature_dt = ordered[0]
+    others = ordered[1:5]
+
+    def _card(art: dict, dt: datetime, feature: bool) -> str:
+        slug = art["slug"]
+        title = html_escape(art["title"])
+        dek = html_escape(art["dek"])
+        cat = html_escape(art["category_label"])
+        author = html_escape(art.get("author", ""))
+        read = art.get("read_minutes", 5)
+        short_date = dt.strftime("%b %-d, %Y")
+        thumb = _thumb_svg(art.get("section", "policy"), cat, feature=feature)
+        klass = "card feat" if feature else "card"
+        meta_parts = []
+        if feature and author:
+            meta_parts.append(f"<span>By {author}</span>")
+        meta_parts.append(f"<span>{read} min read</span>")
+        meta_parts.append(f"<span>{short_date}</span>")
+        return (
+            f'      <article class="{klass}">\n'
+            f'        <a class="thumb" href="news/{slug}/index.html" aria-hidden="true">{thumb}</a>\n'
+            f'        <div class="body">\n'
+            f'          <span class="cat">{cat}</span>\n'
+            f'          <h3><a href="news/{slug}/index.html">{title}</a></h3>\n'
+            f'          <p class="dek">{dek}</p>\n'
+            f'          <div class="meta">{"".join(meta_parts)}</div>\n'
+            f'        </div>\n'
+            f'      </article>'
+        )
+
+    cards = [_card(feature_art, feature_dt, feature=True)]
+    for art, dt in others:
+        cards.append(_card(art, dt, feature=False))
+    top_stories_block = "\n".join(cards)
+    text = _replace_between(text, TOP_STORIES_START, TOP_STORIES_END, top_stories_block)
+
+    # Today at a Glance: 5 short bullets from the same batch (newest first).
+    now = max(datetimes)
+    glance_lines = []
+    for art, dt in ordered[:5]:
+        label = html_escape(art["category_label"])
+        title = html_escape(art["title"])
+        stamp = _relative_time(dt, now)
+        glance_lines.append(
+            f'        <li><strong>{label}:</strong> {title} <span class="stamp">{stamp}</span></li>'
+        )
+    glance_block = "\n".join(glance_lines)
+    text = _replace_between(text, GLANCE_START, GLANCE_END, glance_block)
+
+    HOMEPAGE.write_text(text, encoding="utf-8")
+
+
+def html_escape(s: str) -> str:
+    """Minimal HTML escape for attribute-safe text nodes."""
+    return (
+        s.replace("&", "&amp;")
+         .replace("<", "&lt;")
+         .replace(">", "&gt;")
+         .replace('"', "&quot;")
+    )
+
+
 def update_news_index(articles: list[dict], datetimes: list[datetime]) -> None:
     text = NEWS_INDEX.read_text(encoding="utf-8")
     for art, dt in zip(articles, datetimes):
@@ -359,6 +519,7 @@ CHANGED_PATHS = [
     "sitemap.xml",
     "rss.xml",
     "news/index.html",
+    "index.html",
 ]
 # Plus each new news/{slug}/ directory we wrote, tracked in `written`.
 
@@ -574,6 +735,9 @@ def main() -> int:
 
     update_news_index(new_articles, new_datetimes)
     print("  + updated news/index.html")
+
+    update_homepage(new_articles, new_datetimes)
+    print("  + updated homepage top stories + glance")
 
     commit_message = (
         f"Daily content: {len(new_articles)} article(s) for {pub_date.isoformat()}"
